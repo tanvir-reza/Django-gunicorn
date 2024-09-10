@@ -23,7 +23,7 @@ def home(request):
     try:
         subject = 'Hello, World!'
         email_from = settings.DEFAULT_FROM_EMAIL
-        email_to = 'dev@tanvirreza.me'
+        email_to = 'visible257@starmail.net'
         # import html template from templates folder
         context = {"message": "Hello, World! FROM SMTP2GO"}
         html_content = get_template('email.html').render(context)
