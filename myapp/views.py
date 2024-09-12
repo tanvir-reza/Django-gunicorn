@@ -21,7 +21,7 @@ from .models import MyModel
 # Create your views here.
 def home(request):
     try:
-        subject = 'Hello, World!'
+        subject = 'Hello, World!2'
         email_from = settings.DEFAULT_FROM_EMAIL
         email_to = 'visible257@starmail.net'
         # import html template from templates folder
