@@ -97,9 +97,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
-USE_I18N = True
+
 
 USE_TZ = True
 
@@ -114,15 +114,39 @@ EMAIL_USE_TLS = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        
+        "OPTIONS": {
+            "access_key":"7sxo19shiRQ8usy4wosT",
+            "secret_key": "sy1trvj6dbXVxJwZl8mqhZRaQdiAkj52u9GEG34u",
+            "bucket_name":"demo",
+            # Endpoint to access MinIO from the Django service
+            "endpoint_url": 'http://127.0.0.1:9000',
+            'location': 'media',
+            'default_acl': 'public-read',
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "access_key": "7sxo19shiRQ8usy4wosT",
+            "secret_key": "sy1trvj6dbXVxJwZl8mqhZRaQdiAkj52u9GEG34u",
+            "bucket_name": "demo",
+            "endpoint_url": 'http://localhost:9000',
+            'location': 'static',
+            'default_acl': 'public-read',
+        },
+    },
+}
+
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

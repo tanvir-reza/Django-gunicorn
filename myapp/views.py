@@ -15,6 +15,7 @@ from threading import Thread
 
 # import pdf from media folder
 from .models import MyModel
+from django.utils import timezone
 
 
 
@@ -24,11 +25,12 @@ def home(request):
         subject = 'Hello, World!2'
         email_from = settings.DEFAULT_FROM_EMAIL
         email_to = 'visible257@starmail.net'
+        now = timezone.now().strftime("%Y-%m-%d %H:%M:%S")
         # import html template from templates folder
-        context = {"message": "Hello, World! FROM SMTP2GO"}
+        context = {"message": "Hello, World! FROM SMTP2GO TIME: "+str(now)}
         html_content = get_template('email.html').render(context)
         pdf = HTML(string=html_content).write_pdf()
-        pdf_name = f"monthly_statement.pdf"
+        pdf_name = f"monthly_statement_{now}.pdf"
         obj = MyModel.objects.create(user="Tanvir Reza")
         obj.my_pdf.save(pdf_name, ContentFile(pdf), save=True)
         obj.save()
